@@ -11,31 +11,42 @@ function Device(t,ma,c){
     this.rate = [0.0015,0.0235,0.23];
 
     //Instance Functions
+    this.off = function(){
+        if(this.state == "active" || this.state == "idle" || this.juice <= 0)
+           this.state = "off";
+
+    };
+
     this.on = function(){
         if(this.state == "off" && this.juice >0){
            this.state = "idle";
-        }
-        else if (/*complete*/){
-           //complete from instructions
+       }
+    };
+
+    this.wake = function(){
+        if(this.state == "off" || this.state == "idle"){
+            this.state == "active"
         }
     };
 
     this.charge = function(min){
         //adds more electricity to the device's juice depending on its state
+        let time = min / 60;
+        let charge = (this.millAmps / this.capacity);
         if(this.state == "off"){
-            let charge = (this.millAmps / this.capacity);
             let output = 1 - this.rate[0];
-            let time = min / 60;
-            this.juice = this.juice + charge*output*time;
         }
-        else if(this.state=="active"){
-            .30(1-"active")
+        else if(this.state=="idle"){
+            let output = 1 - this.rate[1];
         }
-        else if(){}
-
+        else if(this.state == "active"){
+            let output = 1 - this.rate[2];
+        }
+this.juice = this.juice + charge*output*time;
         //resets juice to 1 if it has exceeded 1
-        if(){}
-
+        if(this.juice > 1){
+            this.juice = 1
+        }
     };
 
 }//end of the device declaration
