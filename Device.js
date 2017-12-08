@@ -14,7 +14,6 @@ function Device(t,ma,c){
     this.off = function(){
         if(this.state == "active" || this.state == "idle" || this.juice <= 0)
            this.state = "off";
-
     };
 
     this.on = function(){
@@ -28,6 +27,20 @@ function Device(t,ma,c){
             this.state == "active"
         }
     };
+
+    this.use = function(min){
+        let time = min / 60;
+
+        if(this.state == "off"){
+            let juice = juice - this.rate[0];
+        }
+        else if(this.state=="idle"){
+            let juice = juice - this.rate[1];
+        }
+        else if(this.state == "active"){
+            let juice = juice - this.rate[2];
+        }
+    }
 
     this.charge = function(min){
         //adds more electricity to the device's juice depending on its state
@@ -48,6 +61,7 @@ this.juice = this.juice + charge*output*time;
             this.juice = 1
         }
     };
+
 
 }//end of the device declaration
 
