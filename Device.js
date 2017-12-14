@@ -52,7 +52,7 @@ function Device(t,ma,c){
         //adds more electricity to the device's juice depending on its state
         let output
         let time = min / 60;
-        let charge = (this.millAmps / this.capacity);
+        let charge = (this.milliamps / this.capacity);
         if(this.state == "off"){
             output = 1 - this.rate[0];
         }
@@ -71,25 +71,5 @@ function Device(t,ma,c){
 
 
 }//end of the device declaration
-
+module.exports= Device;
 //defines the testing code.
-function main(){
-let flemphone = new Device("phone",3000,10000);
-console.log(flemphone.power());
-flemphone.on();
-flemphone.wake();
-flemphone.use(90);
-console.log(flemphone.power());
-flemphone.sleep();
-flemphone.use(300);
-console.log(flemphone.power());
-flemphone.off();
-flemphone.use(300);
-console.log(flemphone.power());
-flemphone.charge(60);
-console.log(flemphone.power());
-flemphone.charge(1000);
-console.log(flemphone.power());
-}
-main();
-//Defines how all Devices with work.
